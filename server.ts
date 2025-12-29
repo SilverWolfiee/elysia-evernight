@@ -1,13 +1,28 @@
 import { Elysia, t } from "elysia";
-import { saveUsers, loadUsers } from "./src/user.ts";
+// import 'dotenv/config';
+import { loadUsers, saveUsers } from "./src/stores/user";
+import { githubAuth } from "./src/routes/github";
 
+// interface GitHubUser {
+//   id: number;
+//   login: string;
+//   avatar_url: string;
+//   html_url: string;
+// }
+if (
+  !process.env.GITHUB_CLIENT_ID ||
+  !process.env.GITHUB_CLIENT_SECRET ||
+  !process.env.OAUTH_BASE_URL
+) 
+{
+  console.warn("[WARN] GitHub OAuth env vars are not fully set");
+}
 const app = new Elysia()
   .post(
     "/register",
     ({ body }) => {
       const { userId, username } = body;
       const users = loadUsers();
-
 
       if (users[userId]) {
         return {
@@ -34,7 +49,6 @@ const app = new Elysia()
           spd: 96,
         },
       };
-
       saveUsers(users);
       console.log(
         `[REGISTER] ${username} (${userId}) @ ${new Date().toLocaleString()}`
@@ -53,6 +67,7 @@ const app = new Elysia()
       }),
     }
   )
+  app.use(githubAuth)
   .listen(3000);
-
+console.log("你好, 世界!")
 console.log("Elysia is Listening on http://localhost:3000");

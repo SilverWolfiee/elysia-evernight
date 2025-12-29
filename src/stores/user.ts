@@ -53,3 +53,31 @@ export function loadUsers(): Record<string, any> {
 export function saveUsers(users: Record<string, any>) {
   fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
 }
+export type User = {
+  jades?: number;
+  credits?: number;
+  pity?: number;
+  xp?: number;
+  level?: number;
+  registeredAt?: string;
+  power?: number;
+  lastPowerUpdate?: number;
+  lastDaily?: number;
+
+  stats?: {
+    atk: number;
+    def: number;
+    maxHP: number;
+    critRate: number;
+    critDmg: number;
+    spd: number;
+  };
+
+  github?: {
+    id: number;
+    username: string;
+    avatar: string;
+    profileUrl: string;
+    linkedAt: string;
+  };
+};
