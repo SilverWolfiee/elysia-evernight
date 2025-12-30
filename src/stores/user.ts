@@ -81,3 +81,8 @@ export type User = {
     linkedAt: string;
   };
 };
+if (!fs.existsSync(filePath)) {
+    console.log(`ERROR: Database not found at ${filePath}`);
+} else {
+    console.log(`SUCCESS: Database loaded from ${filePath}`);
+}

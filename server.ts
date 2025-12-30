@@ -67,7 +67,20 @@ const app = new Elysia()
       }),
     }
   )
+  .get("/user/:id", ({ params: { id } }) => {
+      const users = loadUsers();
+      const user = users[id];
+
+      if (!user) {
+          return new Response(JSON.stringify({ error: "Elysia Can't find your user" }), {
+              status: 404,
+              headers: { "Content-Type": "application/json" }
+          });
+      }
+      return user; 
+  })
+
   app.use(githubAuth)
-  .listen(3000);
+  .listen(21000);
 console.log("你好, 世界!")
-console.log("Elysia is Listening on http://localhost:3000");
+console.log("Elysia is Listening on http://localhost:21000");
