@@ -1,13 +1,8 @@
 import fs from "fs";
-import os from "os";
+import path from "path";
 
-let filePath: string;
-
-if (os.platform() === "win32") {
-  filePath = "C:\\Users\\EnDragyy\\evernight-database\\users.json";
-} else {
-  filePath = "/home/silverwolf/Windows/Users/EnDragyy/evernight-database/users.json";
-}
+const dataDir = process.env.DATA_DIR ?? "./data";
+const filePath = path.resolve(dataDir, "users.json");
 
 export function loadUsers(): Record<string, any> {
   if (!fs.existsSync(filePath)) {

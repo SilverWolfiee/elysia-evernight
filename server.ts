@@ -2,6 +2,8 @@ import { Elysia, t } from "elysia";
 // import 'dotenv/config';
 import { loadUsers, saveUsers } from "./src/stores/user";
 import { githubAuth } from "./src/routes/github";
+import { osuAuth } from "./src/routes/osu";
+
 import os from "os"
 if(os.platform()=== "win32"){
   console.log("Here's a nickel kid, GET YOURSELF A FCKING REAL OS, STOP USING WINSLOP")
@@ -22,55 +24,55 @@ if (
   console.warn("[WARN] GitHub OAuth env vars are not fully set");
 }
 const app = new Elysia()
-  .post(
-    "/register",
-    ({ body }) => {
-      const { userId, username } = body;
-      const users = loadUsers();
+  // .post(
+  //   "/register",
+  //   ({ body }) => {
+  //     const { userId, username } = body;
+  //     const users = loadUsers();
 
-      if (users[userId]) {
-        return {
-          success: false,
-          message: `You already have an account, ${username} 🦼`,
-        };
-      }
-      users[userId] = {
-        jades: 1600,
-        credits: 10000,
-        pity: 0,
-        xp: 0,
-        level: 1,
-        registeredAt: new Date().toISOString(),
-        power: 300,
-        lastPowerUpdate: Date.now(),
-        lastDaily: 0,
-        stats: {
-          atk: 20,
-          def: 10,
-          maxHP: 100,
-          critRate: 0.05,
-          critDmg: 1.5,
-          spd: 96,
-        },
-      };
-      saveUsers(users);
-      console.log(
-        `[REGISTER] ${username} (${userId}) @ ${new Date().toLocaleString()}`
-      );
+  //     if (users[userId]) {
+  //       return {
+  //         success: false,
+  //         message: `You already have an account, ${username} 🦼`,
+  //       };
+  //     }
+  //     users[userId] = {
+  //       jades: 1600,
+  //       credits: 10000,
+  //       pity: 0,
+  //       xp: 0,
+  //       level: 1,
+  //       registeredAt: new Date().toISOString(),
+  //       power: 300,
+  //       lastPowerUpdate: Date.now(),
+  //       lastDaily: 0,
+  //       stats: {
+  //         atk: 20,
+  //         def: 10,
+  //         maxHP: 100,
+  //         critRate: 0.05,
+  //         critDmg: 1.5,
+  //         spd: 96,
+  //       },
+  //     };
+  //     saveUsers(users);
+  //     console.log(
+  //       `[REGISTER] ${username} (${userId}) @ ${new Date().toLocaleString()}`
+  //     );
 
-      return {
-        success: true,
-        message:
-          "Successfully registered an account!\nYou received **1600 jades** and **10,000 credits** as a starting gift.",
-      };
-    },
-    {
-      body: t.Object({
-        userId: t.String(),
-        username: t.String(),
-      }),
-    }
-  )
+  //     return {
+  //       success: true,
+  //       message:
+  //         "Successfully registered an account!\nYou received **1600 jades** and **10,000 credits** as a starting gift.",
+  //     };
+  //   },
+  //   {
+  //     body: t.Object({
+  //       userId: t.String(),
+  //       username: t.String(),
+  //     }),
+  //   }
+  // )
   .get("/user/:id", ({ params: { id } }) => {
       const users = loadUsers();
       const user = users[id];
@@ -83,9 +85,9 @@ const app = new Elysia()
       }
       return user; 
   })
-
-  app.use(githubAuth)
+  .use(osuAuth)
+  .use(githubAuth)
   .listen(21000);
 
 console.log("你好, 世界!")
-console.log("Elysia is Listening on http://100.124.224.50:21000");
+console.log("Elysia is Listening on port 21000");
