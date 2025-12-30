@@ -2,7 +2,11 @@ import { Elysia, t } from "elysia";
 // import 'dotenv/config';
 import { loadUsers, saveUsers } from "./src/stores/user";
 import { githubAuth } from "./src/routes/github";
-
+import os from "os"
+if(os.platform()=== "win32"){
+  console.log("Here's a nickel kid, GET YOURSELF A FCKING REAL OS, STOP USING WINSLOP")
+  process.exit(1)
+}
 // interface GitHubUser {
 //   id: number;
 //   login: string;
@@ -82,5 +86,6 @@ const app = new Elysia()
 
   app.use(githubAuth)
   .listen(21000);
+
 console.log("你好, 世界!")
-console.log("Elysia is Listening on http://localhost:21000");
+console.log("Elysia is Listening on http://100.124.224.50:21000");

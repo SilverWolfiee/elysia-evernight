@@ -14,7 +14,8 @@ This server handles:
 - **Bun** – JavaScript runtime
 - **Elysia.js** – Backend framework
 - **TypeScript**
-
+### NOTE
+This server only works on "real" operating systems, such as GNU/Linux. If you don't have one, sucks to be you i guess, or try WSL idk i never try.
 
 
 
@@ -22,12 +23,11 @@ To install dependencies:
 
 ```bash
 bun install
+bun add elysia
 ```
 
 To run:
-
 ```bash
 bun run server.ts
 ```
 
-This project was created using `bun init` in bun v1.3.5. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
