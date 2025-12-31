@@ -1,13 +1,11 @@
 # elysia-evernight
 A backend server for my Evernight Discord Bot
-[Evernight](https://github.com/SilverWolfiee/evernight-bot)
+[Evernight-bot](https://github.com/SilverWolfiee/evernight-bot)
 
 This backend is built using **Elysia.js** and **Bun**.
 ## Purpose
 This server handles:
-- Account registration logic
-- Shared user data processing
-- Future OAuth integrations (e.g. GitHub linking, Osu account linking)
+- OAuth integrations (e.g. GitHub linking, Osu account linking)
 - APIs used by the Discord bot
 
 ## Tech Stack
@@ -24,6 +22,7 @@ To install dependencies:
 ```bash
 bun install
 bun add elysia
+bun add osu
 ```
 
 To run:
