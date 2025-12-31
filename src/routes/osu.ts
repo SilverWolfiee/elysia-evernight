@@ -241,9 +241,7 @@ export const osuAuth = new Elysia({ name: "osu-auth" })
                         const maxPerfCL = maxCalcCL.calculate(rosuMap);
                         maxPPcl = maxPerfCL.pp;
                         starscl = maxPerfCL.difficulty.stars;
-
                         // Classic "If FC"
-                       
                         const ifFcPerfCL = new Performance({ 
                             mods: classicModsStr as any,
                             n300: simulated300s, 

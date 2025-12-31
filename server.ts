@@ -9,12 +9,7 @@ if(os.platform()=== "win32"){
   console.log("Here's a nickel kid, GET YOURSELF A FCKING REAL OS, STOP USING WINSLOP")
   process.exit(1)
 }
-// interface GitHubUser {
-//   id: number;
-//   login: string;
-//   avatar_url: string;
-//   html_url: string;
-// }
+
 if (
   !process.env.GITHUB_CLIENT_ID ||
   !process.env.GITHUB_CLIENT_SECRET ||
@@ -24,55 +19,6 @@ if (
   console.warn("[WARN] GitHub OAuth env vars are not fully set");
 }
 const app = new Elysia()
-  // .post(
-  //   "/register",
-  //   ({ body }) => {
-  //     const { userId, username } = body;
-  //     const users = loadUsers();
-
-  //     if (users[userId]) {
-  //       return {
-  //         success: false,
-  //         message: `You already have an account, ${username} 🦼`,
-  //       };
-  //     }
-  //     users[userId] = {
-  //       jades: 1600,
-  //       credits: 10000,
-  //       pity: 0,
-  //       xp: 0,
-  //       level: 1,
-  //       registeredAt: new Date().toISOString(),
-  //       power: 300,
-  //       lastPowerUpdate: Date.now(),
-  //       lastDaily: 0,
-  //       stats: {
-  //         atk: 20,
-  //         def: 10,
-  //         maxHP: 100,
-  //         critRate: 0.05,
-  //         critDmg: 1.5,
-  //         spd: 96,
-  //       },
-  //     };
-  //     saveUsers(users);
-  //     console.log(
-  //       `[REGISTER] ${username} (${userId}) @ ${new Date().toLocaleString()}`
-  //     );
-
-  //     return {
-  //       success: true,
-  //       message:
-  //         "Successfully registered an account!\nYou received **1600 jades** and **10,000 credits** as a starting gift.",
-  //     };
-  //   },
-  //   {
-  //     body: t.Object({
-  //       userId: t.String(),
-  //       username: t.String(),
-  //     }),
-  //   }
-  // )
   .get("/user/:id", ({ params: { id } }) => {
       const users = loadUsers();
       const user = users[id];
