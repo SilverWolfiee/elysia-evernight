@@ -1,8 +1,9 @@
 import { Elysia, t } from "elysia";
 // import 'dotenv/config';
-import { loadUsers, saveUsers } from "./src/stores/user";
+
 import { githubAuth } from "./src/routes/github";
 import { osuAuth } from "./src/routes/osu";
+import {fnaf} from "./src/routes/fnafmml"
 
 import os from "os"
 if(os.platform()=== "win32"){
@@ -19,20 +20,9 @@ if (
   console.warn("[WARN] GitHub OAuth env vars are not fully set");
 }
 const app = new Elysia()
-  .get("/user/:id", ({ params: { id } }) => {
-      const users = loadUsers();
-      const user = users[id];
-
-      if (!user) {
-          return new Response(JSON.stringify({ error: "Elysia Can't find your user" }), {
-              status: 404,
-              headers: { "Content-Type": "application/json" }
-          });
-      }
-      return user; 
-  })
   .use(osuAuth)
   .use(githubAuth)
+  .use(fnaf)
   .listen(21000);
 
 console.log("你好, 世界!")
