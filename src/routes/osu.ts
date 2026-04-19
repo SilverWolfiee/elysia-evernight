@@ -44,7 +44,7 @@ async function getAppToken(){
         method: "POST",
         headers : {"Content-Type" :  "application/json"},
         body: JSON.stringify({
-            client_id: parseInt(process.env.OSU_CLIENT_ID!),
+            client_id: process.env.OSU_CLIENT_ID!,
             client_secret: process.env.OSU_CLIENT_SECRET!,
             grant_type: "client_credentials",
             scope: "public"
@@ -99,7 +99,7 @@ export const osuAuth = new Elysia({ name: "osu-auth" })
                     "Accept": "application/json" 
                 },
                 body: JSON.stringify({
-                    client_id: parseInt(process.env.OSU_CLIENT_ID!),
+                    client_id: process.env.OSU_CLIENT_ID!,
                     client_secret: process.env.OSU_CLIENT_SECRET!,
                     code,
                     grant_type: "authorization_code",

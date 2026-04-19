@@ -23,7 +23,10 @@ const app = new Elysia()
   .use(osuAuth)
   .use(githubAuth)
   .use(fnaf)
-  .listen(21000);
+  .listen({
+    port: Number(process.env.PORT) || 21000,
+    hostname: '0.0.0.0' 
+   });
 
 console.log("你好, 世界!")
 console.log("Elysia is Listening on port 21000");
