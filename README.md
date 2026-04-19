@@ -21,8 +21,7 @@ To install dependencies:
 
 ```bash
 bun install
-bun add elysia
-bun add osu
+
 ```
 
 To run:
